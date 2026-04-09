@@ -1,34 +1,51 @@
-# Llama-3 Domain-Specific Fine-Tuning for Fraud Detection
+# 🛡️ Llama-3 Fraud Guard: Domain-Specific Fine-Tuning
+### Industry-Grade LLM Pipeline for Financial Security
 
-An industry-grade MLOps pipeline to fine-tune Meta Llama-3-8B on financial transaction data for real-time fraud detection. Optimized with **Unsloth (QLoRA)** for 2x faster training and 70% less memory usage.
+![Dashboard Mockup](streamlit_dashboard_mockup.png)
 
-## Features
-- **Data Pipeline:** Selective feature extraction (15 key features) from IEEE-CIS Fraud dataset.
-- **Model Training:** 4-bit quantization fine-tuning on Llama-3-8B using Unsloth.
-- **REST API:** Production-ready FastAPI endpoint for model serving.
-- **Interactive UI:** Streamlit Dashboard for real-time analysis and performance visualization.
-- **Deployment:** Containerized with Docker and NVIDIA CUDA support.
+This repository features a **Production-Ready** Fine-tuning pipeline for **Llama-3-8B**, specifically optimized for high-precision fraud detection in financial transactions using the IEEE-CIS dataset.
 
-## Project Structure
-- `src/`: Core logic (Data Prep, Training, Inference)
-- `app.py`: FastAPI server
-- `streamlit_app.py`: User Interface
-- `Dockerfile`: Deployment configuration
-- `configs/`: Hyperparameters and paths
-- `evaluation/`: Accuracy and comparison reports
+## 🚀 Project Highlights
+- **State-of-the-Art Optimization:** Leverages **Unsloth** and **QLoRA** for memory-efficient fine-tuning on consumer-grade hardware.
+- **Enterprise Architecture:** Fully containerized using **Docker** for consistent deployment across local, cloud, and edge environments.
+- **Dual-Interface Serving:**
+    - **FastAPI:** High-performance REST API for automated system integration.
+    - **Streamlit:** Intuitive dashboard for manual transaction auditing and visualization.
+- **Robust Pipeline:** Modular scripts for stratified data preprocessing, controlled training, and optimized inference.
 
-## How to Run locally
-1. Install dependencies: `pip install -r requirements.txt`
-2. Prepare data: `python main.py --stage preprocess`
-3. Train model (requires GPU): `python main.py --stage train`
-4. Launch Dashboard: `streamlit run streamlit_app.py`
+## 🏗️ Technical Architecture
+1. **Data Preprocessing:** Converts raw transaction logs into natural language instruction sets optimized for Llama-3.
+2. **Fine-Tuning:** Employs Parameter-Efficient Fine-Tuning (PEFT) on Llama-3-8B with industry-standard hyper-parameters.
+3. **Containerization:** Packages the entire environment (CUDA 12.1 + Python 3.11) into a single Docker image.
+4. **Monitoring:** Built-in professional logging (Rotating File Handlers) for production tracking.
 
-## Performance
-- **Base Accuracy:** ~45% (General LLM)
-- **Fine-Tuned Accuracy:** ~94% (Fraud Specialist)
+## 📂 Project Structure
+```text
+├── src/                # Core Logic (Preprocessing, Training, Inference)
+├── configs/            # YAML based project configurations
+├── models/             # Target folder for fine-tuned adapters
+├── Dockerfile          # Multi-layer Docker build instructions
+├── docker-compose.yml  # Container orchestration with GPU support
+├── streamlit_app.py    # Analytics Dashboard
+└── app.py              # FastAPI Inference Server
+```
 
-## Technology Stack
-- **Model:** Meta Llama-3-8B
-- **Frameworks:** Unsloth, Hugging Face (TRL, PEFT, Transformers)
-- **Ops:** Docker, FastAPI, Streamlit
-- **Optimization:** QLoRA, 4-bit Quantization, AdamW 8-bit
+## ⚙️ How to Deploy (Production)
+The project is designed to run in a containerized environment to ensure scalability.
+
+```bash
+# 1. Build the production image
+docker compose build
+
+# 2. Launch the services (API + UI)
+docker compose up -d
+
+# 3. Access Dashboard
+http://localhost:8501
+```
+
+## ⚠️ Note on Hardware Requirements
+This project is designed for **NVIDIA GPUs (16GB+ VRAM recommended)**. Due to the high compute overhead of LLM extraction and training, local execution requires significant disk I/O and CUDA support.
+
+---
+*Created for a Professional MLOps Portfolio | Targeted at Senior AI/ML Roles.*
