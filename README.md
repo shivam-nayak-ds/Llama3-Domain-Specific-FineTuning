@@ -1,9 +1,18 @@
 # 🛡️ Llama-3 Fraud Guard: Domain-Specific Fine-Tuning
 ### Industry-Grade LLM Pipeline for Financial Security
 
-![Dashboard Screenshot](dashboard_screenshot.png)
+![Main Dashboard](screenshots/dashboard_1.png)
 
 This repository features a **Production-Ready** Fine-tuning pipeline for **Llama-3-8B**, specifically optimized for high-precision fraud detection in financial transactions using the IEEE-CIS dataset.
+
+## 📸 System in Action (Visual Proof)
+### 1. Interactive Transaction Analysis
+The dashboard allows real-time input of transaction metadata to determine fraud scores.
+
+### 2. Model Comparison Mode
+The system provides a side-by-side comparison between the Base Llama-3 model and our customized "Fraud Guard" fine-tuned version, showcasing the domain-expertise gained through QLoRA fine-tuning.
+
+![Comparison View](screenshots/dashboard_comparison.png)
 
 ## 📊 Model Comparison & Metrics
 | Metric | Base Llama-3-8B | Fine-Tuned Llama-3 (Fraud Guard) | Lift 📈 |

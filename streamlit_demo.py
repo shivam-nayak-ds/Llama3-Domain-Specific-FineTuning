@@ -90,14 +90,14 @@ if analyze_btn:
             else:
                 st.markdown('<div class="result-card">', unsafe_allow_html=True)
                 if is_fraud:
-                st.error("🚨 ALERT: Fraudulent Activity Detected!")
-                st.write("**Confidence Score:** 98.4%")
-                st.write("**Reasoning:** High-value transaction from an unverified device coupled with suspicious geolocational patterns.")
-            else:
-                st.success("✅ Transaction Verified: Legitimate")
-                st.write("**Confidence Score:** 94.2%")
-                st.write("**Reasoning:** Behavior matches historical patterns for this user ID.")
-            st.markdown('</div>', unsafe_allow_html=True)
+                    st.error("🚨 ALERT: Fraudulent Activity Detected!")
+                    st.write("**Confidence Score:** 98.4%")
+                    st.write("**Reasoning:** High-value transaction from an unverified device coupled with suspicious geolocational patterns.")
+                else:
+                    st.success("✅ Transaction Verified: Legitimate")
+                    st.write("**Confidence Score:** 94.2%")
+                    st.write("**Reasoning:** Behavior matches historical patterns for this user ID.")
+                st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.warning("Please enter some transaction data first.")
 
