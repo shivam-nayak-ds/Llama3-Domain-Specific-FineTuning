@@ -61,18 +61,35 @@ with col2:
     st.success("API: Operational")
     st.success("GPU: Simulated")
     st.warning("Hardware: Laptop Standard")
+    st.write("---")
+    compare_mode = st.checkbox("🔄 Compare with Base Model")
 
 # Analysis Logic (Simulated)
 if analyze_btn:
     if tx_input:
-        with st.spinner("Llama-3 is analyzing the patterns..."):
+        with st.spinner("Analyzing patterns with Ensemble Models..."):
             time.sleep(2) # Simulating LLM Latency
             
             # Mock Logic for Demo
             is_fraud = "fraud" in tx_input.lower() or "10000" in tx_input
             
-            st.markdown('<div class="result-card">', unsafe_allow_html=True)
-            if is_fraud:
+            if compare_mode:
+                c1, c2 = st.columns(2)
+                with c1:
+                    st.subheader("Base Llama-3-8B")
+                    st.info("Prediction: Legitimate")
+                    st.caption("Reason: Amount is within typical global limits.")
+                with c2:
+                    st.subheader("Fine-Tuned (Fraud Guard)")
+                    if is_fraud:
+                        st.error("Prediction: Fraud Alert!")
+                        st.caption("Reason: High-stakes pattern detected for Nigerian IP branch.")
+                    else:
+                        st.success("Prediction: Legitimate")
+                        st.caption("Reason: Verified Seattle Starbucks pattern.")
+            else:
+                st.markdown('<div class="result-card">', unsafe_allow_html=True)
+                if is_fraud:
                 st.error("🚨 ALERT: Fraudulent Activity Detected!")
                 st.write("**Confidence Score:** 98.4%")
                 st.write("**Reasoning:** High-value transaction from an unverified device coupled with suspicious geolocational patterns.")
