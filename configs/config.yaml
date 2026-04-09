@@ -1,0 +1,31 @@
+# Project Configuration for Llama-3 Domain-Specific Fine-Tuning
+
+project:
+  name: "Llama-3-Domain-FineTuning"
+  description: "Professional Llama-3 Fine-tuning pipeline for domain-specific tasks."
+  version: "1.0.0"
+
+paths:
+  raw_data: "data/raw/data.csv"
+  processed_data: "data/processed/"
+  model_output: "models/fine-tuned-llama3/"
+  logs: "logs/"
+  configs: "configs/"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_file: "logs/pipeline.log"
+
+training:
+  base_model: "unsloth/llama-3-8b-bnb-4bit"
+  batch_size: 4
+  learning_rate: 2e-5
+  epochs: 3
+  lora_r: 8
+  lora_alpha: 16
+  max_seq_length: 512
+  weight_decay: 0.01
+  save_steps: 100
+  eval_steps: 50
+  fp16: true
