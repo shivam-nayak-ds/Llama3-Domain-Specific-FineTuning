@@ -1,7 +1,7 @@
 # 🛡️ Llama-3 Fraud Guard: Domain-Specific Fine-Tuning
 ### Industry-Grade LLM Pipeline for Financial Security
 
-![Dashboard Mockup](streamlit_dashboard_mockup.png)
+![Dashboard Screenshot](dashboard_screenshot.png)
 
 This repository features a **Production-Ready** Fine-tuning pipeline for **Llama-3-8B**, specifically optimized for high-precision fraud detection in financial transactions using the IEEE-CIS dataset.
 
