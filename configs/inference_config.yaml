@@ -1,0 +1,60 @@
+# ============================================================
+# Inference Configuration — Financial Analyst Llama-3 API
+# ============================================================
+
+model:
+  base_model_id: "meta-llama/Llama-3.2-3B-Instruct"
+  adapter_path: "./models/llama3-financial-analyst"   # trained LoRA adapter
+  hf_token_env: "HF_TOKEN"
+  torch_dtype: "bfloat16"
+  device_map: "auto"
+  load_in_4bit: true                                  # quantized inference
+
+generation:
+  max_new_tokens: 512
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.1
+  do_sample: true
+  stream: true                                        # token streaming default
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1                                          # single GPU → 1 worker
+  reload: false
+  log_level: "info"
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+
+auth:
+  algorithm: "HS256"
+  token_expire_minutes: 1440                          # 24 hours
+  secret_key_env: "JWT_SECRET_KEY"
+
+rate_limiting:
+  enabled: true
+  requests_per_minute: 60
+  requests_per_day: 1000
+
+cache:
+  enabled: true
+  backend: "redis"
+  redis_url_env: "REDIS_URL"
+  ttl_seconds: 3600                                   # 1 hour cache
+  max_cache_size: 1000
+
+system_prompt: |
+  You are an expert financial analyst with deep knowledge of:
+  - Equity research and stock valuation
+  - Financial statement analysis (P&L, Balance Sheet, Cash Flow)
+  - Financial ratios (P/E, EV/EBITDA, ROE, ROCE, Debt/Equity)
+  - Earnings call analysis and SEC 10-K/10-Q filings
+  - Investment thesis generation and risk assessment
+  - Macroeconomic indicators and market trends
+
+  Provide precise, data-driven, professional financial analysis.
+  Always cite relevant metrics when available.
+  Be concise but comprehensive.

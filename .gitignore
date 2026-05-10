@@ -1,29 +1,35 @@
-# Python
+# ── Python / Env ─────────────────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
-.env
-.venv
+.venv/
 env/
 venv/
-.pytest_cache/
+.env
 
-# Data and Models (Too big for Github)
-data/
-models/
-outputs/
+# ── Data & Models ────────────────────────────────────────────────────────────
+# Hum raw aur processed data GitHub pe push nahi karenge (Too large)
+data/*
+!data/.gitkeep
+
+# Models aur weights push nahi karenge
+models/*
+!models/.gitkeep
+
+# ── Logs & Tracking ──────────────────────────────────────────────────────────
 logs/
-Project_Llama3.zip
+*.log
+wandb/
+mlruns/
 
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints
-
-# OS files
+# ── Tools & Caches ───────────────────────────────────────────────────────────
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 .DS_Store
-Thumbs.db
 
-# IDEs
+# ── IDEs ─────────────────────────────────────────────────────────────────────
 .vscode/
 .idea/
-*.swp
-*.swo

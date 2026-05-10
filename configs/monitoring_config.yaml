@@ -1,0 +1,62 @@
+# ============================================================
+# Monitoring Configuration — Financial Analyst LLM
+# ============================================================
+
+prometheus:
+  enabled: true
+  port: 9090
+  metrics_path: "/metrics"
+  scrape_interval: "15s"
+
+grafana:
+  enabled: true
+  port: 3000
+  admin_user_env: "GRAFANA_USER"
+  admin_password_env: "GRAFANA_PASSWORD"
+  dashboard_dir: "./monitoring/dashboards"
+
+metrics:
+  track_latency: true
+  track_token_count: true
+  track_request_count: true
+  track_error_rate: true
+  track_gpu_memory: true
+  latency_buckets: [0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 30.0]
+
+drift_detection:
+  enabled: true
+  check_interval_minutes: 60
+  window_size: 100                    # last N requests to analyze
+  metrics:
+    - "avg_response_length"
+    - "avg_confidence_score"
+    - "error_rate"
+  thresholds:
+    response_length_drop_pct: 20      # alert if avg length drops 20%
+    error_rate_spike_pct: 5           # alert if error rate > 5%
+
+alerting:
+  enabled: true
+  channels:
+    slack:
+      enabled: false
+      webhook_url_env: "SLACK_WEBHOOK_URL"
+      channel: "#ml-alerts"
+    email:
+      enabled: false
+      smtp_host_env: "SMTP_HOST"
+      smtp_port: 587
+      from_email_env: "ALERT_FROM_EMAIL"
+      to_emails: []
+  alert_on:
+    - drift_detected
+    - high_error_rate
+    - gpu_memory_critical
+    - model_load_failure
+
+logging:
+  level: "INFO"
+  format: "json"
+  log_dir: "./logs"
+  rotate_mb: 100
+  retain_days: 30

@@ -1,21 +1,24 @@
-# Docker commands
-.PHONY: build run up down logs shell
+from datasets import load_dataset
+from loguru import logger
+import os
+from dotenv import load_dotenv
+from src.utils.formatting import format_to_alpaca
 
-build:
-	docker compose build
+load_dotenv()
 
-up:
-	docker compose up -d
+def download_dataset(dataset_name, cache_dir="data"):
+    logger.info(f"Downloading dataset: {dataset_name}")
+    dataset = load_dataset(dataset_name, cache_dir=cache_dir)
+    logger.info(f"Dataset downloaded: {dataset_name}")
+    return dataset
 
-down:
-	docker compose down
+def format_dataset(dataset, output_dir="data"):
+    logger.info(f"Formatting dataset")
+    formatted_dataset = dataset.map(format_to_alpaca)
+    logger.info(f"Dataset formatted")
+    return formatted_dataset
 
-logs:
-	docker compose logs -f
-
-shell:
-	docker exec -it llama3-fraud-guard /bin/bash
-
-# Clean up
-clean:
-	docker system prune -f
+def save_dataset(dataset, output_dir="data"):
+    logger.info(f"Saving dataset")
+    dataset.save_to_disk(output_dir)
+    logger.info(f"Dataset saved to {output_dir}")
